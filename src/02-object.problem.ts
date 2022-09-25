@@ -3,12 +3,13 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
-const PersonResult = z.unknown();
-//                   ^ 🕵️‍♂️
+const PersonResult = z.object({
+  name: z.string(),
+});
 
 export const fetchStarWarsPersonName = async (id: string) => {
   const data = await fetch("https://swapi.dev/api/people/" + id).then((res) =>
-    res.json(),
+    res.json()
   );
 
   const parsedData = PersonResult.parse(data);

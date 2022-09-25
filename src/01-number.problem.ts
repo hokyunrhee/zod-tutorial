@@ -2,17 +2,20 @@
 
 import { expect, it } from "vitest";
 import { z } from "zod";
-//       ^ 🕵️‍♂️
+
+const schema = z.number();
 
 export const toString = (num: unknown) => {
-  return String(num);
+  const result = schema.parse(num);
+
+  return String(result);
 };
 
 // TESTS
 
 it("Should throw a runtime error when called with not a number", () => {
   expect(() => toString("123")).toThrowError(
-    "Expected number, received string",
+    "Expected number, received string"
   );
 });
 
